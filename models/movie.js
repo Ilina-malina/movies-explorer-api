@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { default: isURL } = require('validator/lib/isURL');
-const { nameEnRegex, nameRuRegex } = require('../utils/constants');
+const validator = require('validator');
+const { nameEnRegex, nameRuRegex, linkRegex } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,7 +27,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (link) => isURL(link),
+      validator(v) {
+        return linkRegex.test(v);
+      },
       message: (props) => `${props.value} is not a valid link!`,
     },
   },
@@ -35,7 +37,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (link) => isURL(link),
+      validator(v) {
+        return linkRegex.test(v);
+      },
       message: (props) => `${props.value} is not a valid link!`,
     },
   },
@@ -43,7 +47,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (link) => isURL(link),
+      validator(v) {
+        return linkRegex.test(v);
+      },
       message: (props) => `${props.value} is not a valid link!`,
     },
   },

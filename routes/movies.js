@@ -1,6 +1,6 @@
 const moviesRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const { nameEnRegex, nameRuRegex } = require('../utils/constants');
+const { nameEnRegex, nameRuRegex, linkRegex } = require('../utils/constants');
 
 const {
   getMovies,
@@ -17,11 +17,11 @@ moviesRouter.post('/', celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required(),
-    trailerLink: Joi.string().required(),
+    image: Joi.string().required().pattern(linkRegex),
+    trailerLink: Joi.string().required().pattern(linkRegex),
     nameRU: Joi.string().required().pattern(nameRuRegex),
     nameEN: Joi.string().required().pattern(nameEnRegex),
-    thumbnail: Joi.string().required(),
+    thumbnail: Joi.string().required().pattern(linkRegex),
     movieId: Joi.string().required(),
   }),
 }), createMovie);
