@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
@@ -24,6 +25,10 @@ const limiter = rateLimit({
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+const allowedCors = ['http://my-movies.nomoredomains.club', 'https://my-movies.nomoredomains.club', 'localhost:3000', 'http://localhost:3000'];
+app.use(cors(allowedCors));
+
 app.use(requestLogger);
 app.use(limiter);
 
