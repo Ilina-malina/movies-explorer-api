@@ -22,7 +22,7 @@ moviesRouter.post('/', celebrate({
     nameRU: Joi.string().required().pattern(nameRuRegex),
     nameEN: Joi.string().required().pattern(nameEnRegex),
     thumbnail: Joi.string().required().pattern(linkRegex),
-    movieId: Joi.string().required(),
+    movieId: Joi.number().required(),
   }),
 }), createMovie);
 
